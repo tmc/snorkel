@@ -21,8 +21,10 @@ function getDirs(dir){
 
 module.exports = {
   install: function() {
+
     try {
       var plugin_dirs = getDirs(config.data_dir + "/app/plugins");
+      readfile.register_path(config.data_dir + "/app/plugins");
     } catch(e) {
       console.log("CANT LOAD PLUGINS IN", config.data_dir, "app/plugins");
       return
