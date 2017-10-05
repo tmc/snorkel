@@ -21,7 +21,13 @@ function getDirs(dir){
 
 module.exports = {
   install: function() {
-		var plugin_dirs = getDirs("app/plugins");
+    try {
+      var plugin_dirs = getDirs("app/plugins");
+    } catch(e) {
+      console.log("CANT LOAD PLUGINS IN app/plugins");
+      return
+    }
+
     _.each(plugin_dirs, function(plugin_dir) {
       if (plugin_dir == DATASET_CONFIG_DIR || plugin_dir == SNORKEL_CONFIG_DIR) {
         return;
