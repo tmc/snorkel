@@ -22,9 +22,9 @@ function getDirs(dir){
 module.exports = {
   install: function() {
     try {
-      var plugin_dirs = getDirs("app/plugins");
+      var plugin_dirs = getDirs(config.data_dir + "/app/plugins");
     } catch(e) {
-      console.log("CANT LOAD PLUGINS IN app/plugins");
+      console.log("CANT LOAD PLUGINS IN", config.data_dir, "app/plugins");
       return
     }
 
