@@ -83,6 +83,19 @@ function get_control_row(name) {
 
 function handle_update_view(view) {
   var input_schema = VIEW_INPUTS[view];
+  if (!input_schema) {
+    var self = this;
+    // we will retry after loading the view from plugins dir
+    bootloader.require("app/plugins/" + view, function(mod) {
+      if (VIEW_INPUTS[view]) {
+        console.log("LOADED VIEW PLUGIN", view);
+        handle_update_view.call(self, view);
+      }
+    });
+
+    return;
+  }
+
   var fields = SF.controller().get_fields(this.table);
 
   var custom_controls = input_schema.custom_controls;

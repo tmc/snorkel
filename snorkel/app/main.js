@@ -5,6 +5,7 @@ var perf = require_app("server/perf");
 var config = require_core("server/config");
 var express = require("express");
 var main = require_core("server/main");
+var plugins = require_app("server/plugins");
 
 module.exports = {
   setup_app: function(app) {
@@ -46,6 +47,7 @@ module.exports = {
 
     perf.setup();
     auth.install();
+    plugins.install();
   },
   setup_template_context: function(options) {
     var context = require_core("server/context");
