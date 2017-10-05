@@ -6,8 +6,8 @@ module.exports = {
   config_driver: "linvo",
   data_dir: data_dir,
   config_dir: data_dir,
-  authorized_users: data_dir + "/config/users.htpasswd",
-  authorized_roles: data_dir + "/config/users.rbac",
+  authorized_users: "config/users.htpasswd",
+  authorized_roles: "config/users.rbac",
   udp: false,
   http_port: process.env.PORT || 3000,
   frontend: {
