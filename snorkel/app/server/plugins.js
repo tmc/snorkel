@@ -30,6 +30,10 @@ module.exports = {
       return
     }
 
+    // TODO: this loop does nothing, since we don't actually need to scan the
+    // list of plugins that exist, at the moment. any plugins placed in
+    // app/plugins/ that have controllers can be enabled through routes.json
+    // inside one of these plugin dirs, which uses superfluous' plugin system
     _.each(plugin_dirs, function(plugin_dir) {
       if (plugin_dir == DATASET_CONFIG_DIR || plugin_dir == SNORKEL_CONFIG_DIR) {
         return;
