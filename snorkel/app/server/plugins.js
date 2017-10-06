@@ -34,9 +34,6 @@ module.exports = {
       if (plugin_dir == DATASET_CONFIG_DIR || plugin_dir == SNORKEL_CONFIG_DIR) {
         return;
       }
-
-      console.log("REGISTERING SNORKEL PLUGIN", plugin_dir);
-      plugin.register_external_plugin(plugin_dir);
     });
   },
   get_views_for_table: function get_plugin_views(table) {
@@ -72,37 +69,36 @@ module.exports = {
 
   },
 
+  // A config is applied like so:
+  // the ALL config is first retrieved
+  // then the dataset specific config is overlaid on it
+  // if the dataset config is missing, the default config is overlaid.
+  //
+  // it will look like: all_config + (dataset_config or default_config),
+  // where keys from all are replaced by keys from dataset_config
   get_config: function get_plugin_configs(table) {
-    // do we do a multi plugin config? how does this work?
     var plugin_config;
 
+
+    var all_config = {};
     try {
-      plugin_config = require_common(DATASET_CONFIG_DIR + "/" + table);
-      if (config.debug_plugins) {
-        console.log("USING CONFIG FOR", table);
+      var plugin_configs = require_common(DATASET_CONFIG_DIR);
+      var all_config = plugin_configs.all || {};
+      plugin_config = plugin_configs[table];
+      if (!plugin_config) {
+        if (_.isFunction(plugin_configs.get_config)) {
+          plugin_config = plugin_configs.get_config(table);
+        } else {
+          plugin_config = plugin_configs['default'];
+        }
       }
     } catch(e) {
       if (config.debug_plugins) {
-        console.log("CANT LOAD CONFIG FOR", table + ": " + e);
-      }
-      try {
-        plugin_config = require_common(DATASET_CONFIG_DIR + "/default");
-        if (config.debug_plugins) {
-          console.log("USING DEFAULT CONFIG FOR", table);
-        }
-      } catch(e) {
-        if (config.debug_plugins) {
-          console.log("CANT LOAD DEFAULT CONFIG FOR", table + ":" + e);
-        }
-
+        console.log("PLUGINS: Couldnt load plugin config for table", table, ":" + e);
       }
     }
 
-
-    return plugin_config || {};
-
-  },
-  get_configs: function get_plugin_configs() {
+    return _.extend(all_config, plugin_config || {});
 
   }
 };
