@@ -93,8 +93,6 @@ function get_view_selector_row(meta_) {
   var view_plugins = plugins.get_views_for_table(table);
 
   // how can a config disable plugins?
-  console.log("VIEW PLUGINS", view_plugins);
-
   var options = _.extend({
     "table" : "Table",
     "time" : "Time Series",

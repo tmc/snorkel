@@ -6,6 +6,7 @@ var config = require_core("server/config");
 var express = require("express");
 var main = require_core("server/main");
 var plugins = require_app("server/plugins");
+var globals = require_app("server/globals");
 
 module.exports = {
   setup_app: function(app) {
@@ -45,6 +46,7 @@ module.exports = {
     } catch(e) { console.log("Not using /etc/snorkel/config.js"); }
 
 
+    globals.install();
     perf.setup();
     auth.install();
     plugins.install();

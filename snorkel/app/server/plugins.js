@@ -77,13 +77,23 @@ module.exports = {
     var plugin_config;
 
     try {
-      plugin_config = require(DATASET_CONFIG_DIR + "/" + table);
+      plugin_config = require_common(DATASET_CONFIG_DIR + "/" + table);
+      if (config.debug_plugins) {
+        console.log("USING CONFIG FOR", table);
+      }
     } catch(e) {
-      console.log("CANT LOAD CONFIG FOR", table + ": " + e);
+      if (config.debug_plugins) {
+        console.log("CANT LOAD CONFIG FOR", table + ": " + e);
+      }
       try {
-        plugin_config = require(DATASET_CONFIG_DIR + "/default");
+        plugin_config = require_common(DATASET_CONFIG_DIR + "/default");
+        if (config.debug_plugins) {
+          console.log("USING DEFAULT CONFIG FOR", table);
+        }
       } catch(e) {
-        console.log("CANT LOAD DEFAULT CONFIG FOR", table + ":" + e);
+        if (config.debug_plugins) {
+          console.log("CANT LOAD DEFAULT CONFIG FOR", table + ":" + e);
+        }
 
       }
     }
