@@ -77,14 +77,13 @@ module.exports = {
     var plugin_config;
 
     try {
-      plugin_config = require_root(DATASET_CONFIG_DIR + "/" + table);
-      console.log("USING CONFIG FOR", table);
+      plugin_config = require(DATASET_CONFIG_DIR + "/" + table);
     } catch(e) {
+      console.log("CANT LOAD CONFIG FOR", table + ": " + e);
       try {
-        plugin_config = require_app("plugins/config/default");
-        console.log("USING DEFAULT CONFIG FOR", table);
+        plugin_config = require(DATASET_CONFIG_DIR + "/default");
       } catch(e) {
-        console.log("CANT LOAD DEFAULT CONFIG FOR", table);
+        console.log("CANT LOAD DEFAULT CONFIG FOR", table + ":" + e);
 
       }
     }

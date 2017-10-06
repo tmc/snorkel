@@ -7,7 +7,7 @@ module.exports = {
   config_driver: "linvo",
   data_dir: data_dir,
   config_dir: data_dir,
-  dataset_config_dir: data_dir + "/snorkel-dataset-config",
+  dataset_config_dir: data_dir + "app/plugins/snorkel-dataset-config",
   authorized_users: "config/users.htpasswd",
   authorized_roles: "config/users.rbac",
   udp: false,
