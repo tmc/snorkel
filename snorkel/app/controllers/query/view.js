@@ -107,6 +107,7 @@ function get_view_selector_row(meta_) {
     "scatter" : "Scatter Plot",
     "multidist" : "Grouped Dist.",
     "graph" : "DiGraph",
+    "datamap" : "Map View",
     " " : "--",
     "drill" : "Impact Attr.",
     "holtwinters" : "Forecasting",
