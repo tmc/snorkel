@@ -1,3 +1,4 @@
+// this configuration loads values from environment variables.
 var data_dir = process.env.DATA_DIR || ".";
 
 module.exports = {

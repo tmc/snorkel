@@ -17,6 +17,6 @@ COPY snorkel /snorkel
 EXPOSE 3000
 EXPOSE 59036/udp
 
-ENV ENV=docker
+ENV ENV=env
 
 CMD ["node", "app.js"]
