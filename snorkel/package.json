@@ -38,8 +38,9 @@
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
+    "copy-assets": "cd ./src; find . -type f,l ! \\( -name '*.js' -or -name '*.ts' \\) -exec cp -d --parents {} ../build \\;; rsync -qaP ./app/static/vendor/ ../build/app/static/vendor/",
     "fix": "gts fix",
-    "prepare": "npm run compile",
+    "prepare": "npm run compile; npm run copy-assets",
     "pretest": "npm run compile",
     "posttest": "npm run check"
   }
